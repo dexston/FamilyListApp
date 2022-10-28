@@ -11,31 +11,29 @@ import UIKit
 enum K {
     enum String {
         enum Parent {
-            static let blockTitle = "Personal data"
-            static let nameTitle = "Name"
-            static let ageTitle = "Age"
-            static let namePlaceholder = "Short or Full name (max. 100)"
+            static let blockTitle = "Персональные данные"
+            static let nameTitle = "Имя"
+            static let ageTitle = "Возраст"
+            static let namePlaceholder = "Полное (макс. 100)"
             static let agePlaceholder = "18 - 99"
         }
         enum Children {
-            static let blockTitle = "Childrens (max. 5)"
-            static let ageTitle = "Age"
+            static let blockTitle = "Дети (макс. 5)"
+            static let ageTitle = "Возраст"
             static let agePlaceholder = "0 - 18"
         }
         enum Buttons {
-            static let addChild = "Add child"
-            static let clearAll = "Clead all"
-            static let trashCanIcon = "trash"
+            static let addChild = "Добавить ребёнка"
+            static let clearAll = "Очистить"
         }
         enum ClearAlert {
-            static let title = "There is data entered"
-            static let message = "Are you sure you want to delete everything?"
-            static let destructiveButton = "Yes, delete all"
-            static let cancelButton = "No, cancel"
+            static let title = "Есть введённые данные"
+            static let message = "Вы уверены, что хотите сбросить их?"
+            static let destructiveButton = "Сбросить данные"
+            static let cancelButton = "Отмена"
         }
     }
     enum Value {
-        static let textFieldFontSize = CGFloat(17)
         static let basicSpacing = CGFloat(20)
         static let halfBasicSpacing = CGFloat(10)
         static let reusableCellIdentifier = "cell"
@@ -47,7 +45,22 @@ enum K {
             static let textFieldHorizontal = CGFloat(15)
             static let textFieldVertical = CGFloat(10)
             static let basic = CGFloat(20)
-            static let halfBasic = CGFloat(20)
+            static let halfBasic = CGFloat(10)
+        }
+        enum Button {
+            static let cornerRadius = CGFloat(25)
+            static let height = CGFloat(50)
+            static let width = CGFloat(200)
+            static let strokeWidth = CGFloat(2)
+            static let colorAlpha = CGFloat(0.7)
+            static let trashcanWidth = CGFloat(80)
+            static let trashcanIcon = "trash"
+            static let plusIcon = "plus"
+        }
+        enum TextField {
+            static let fontSize = CGFloat(17)
+            static let cornerRadius = CGFloat(5)
+            static let borderWidth = CGFloat(1)
         }
     }
 }

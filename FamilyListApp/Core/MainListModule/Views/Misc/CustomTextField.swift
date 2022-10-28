@@ -34,14 +34,14 @@ class CustomTextField: UIStackView {
     
     private var labelTitle: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: K.Value.textFieldFontSize, weight: .light)
+        label.font = .systemFont(ofSize: K.Value.TextField.fontSize, weight: .light)
         label.textColor = .systemGray
         return label
     }()
     
     private var textField: UITextField = {
         let field = UITextField()
-        field.font = .systemFont(ofSize: K.Value.textFieldFontSize, weight: .light)
+        field.font = .systemFont(ofSize: K.Value.TextField.fontSize, weight: .light)
         return field
     }()
     
@@ -50,9 +50,9 @@ class CustomTextField: UIStackView {
         addArrangedSubview(labelTitle)
         addArrangedSubview(textField)
         axis = .vertical
-        layer.cornerRadius = 5
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        layer.cornerRadius = K.Value.TextField.cornerRadius
+        layer.borderWidth = K.Value.TextField.borderWidth
+        layer.borderColor = UIColor.systemGray5.cgColor
         spacing = K.Value.halfBasicSpacing
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(top: K.Value.Margin.textFieldVertical,

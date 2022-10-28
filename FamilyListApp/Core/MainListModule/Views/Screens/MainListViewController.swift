@@ -53,14 +53,8 @@ class MainListViewController: UIViewController {
         return table
     }()
     
-    private let clearButton: UIButton = {
-        let button = UIButton()
-        button.prepareForAutoLayout()
-        button.configuration = .bordered()
-        button.setTitle(K.String.Buttons.clearAll, for: .normal)
-        button.isEnabled = false
-        return button
-    }()
+    private let clearButton = CustomButton(title: K.String.Buttons.clearAll,
+                                           color: .systemRed)
     
     private let clearAlert = UIAlertController(title: K.String.ClearAlert.title,
                                                message: K.String.ClearAlert.message,
@@ -74,8 +68,6 @@ class MainListViewController: UIViewController {
         view.addSubview(clearButton)
         view.backgroundColor = .systemBackground
         childrenBlock.dataSource = self
-        parentNameField.delegate = self
-        parentAgeField.delegate = self
         setupParentBlock()
         setupButtons()
         setupConstraints()
@@ -86,6 +78,8 @@ class MainListViewController: UIViewController {
         parentBlock.setCustomSpacing(K.Value.basicSpacing, after: parentTitle)
         parentBlock.addArrangedSubview(parentNameField)
         parentBlock.addArrangedSubview(parentAgeField)
+        parentNameField.delegate = self
+        parentAgeField.delegate = self
     }
     
     private func setupButtons() {
@@ -93,7 +87,9 @@ class MainListViewController: UIViewController {
             guard let self = self else { return }
             self.present(self.clearAlert, animated: true, completion: nil)
         }, for: .touchUpInside)
-        clearAlert.addAction(UIAlertAction(title: K.String.ClearAlert.destructiveButton, style: .destructive, handler: { [weak self] _ in
+        clearAlert.addAction(UIAlertAction(title: K.String.ClearAlert.destructiveButton,
+                                           style: .destructive,
+                                           handler: { [weak self] _ in
             guard let self = self else { return }
             self.presenter?.clearAll()
             self.parentNameField.setValue(with: nil)
@@ -117,10 +113,9 @@ class MainListViewController: UIViewController {
             childrenBlock.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             childrenBlock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             childrenBlock.topAnchor.constraint(equalTo: childrenHeader.bottomAnchor),
-            childrenBlock.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -K.Value.basicSpacing),
+            childrenBlock.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -K.Value.halfBasicSpacing),
             //
-            clearButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.Value.basicSpacing),
-            clearButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.Value.basicSpacing),
+            clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -K.Value.basicSpacing)
         ]
         NSLayoutConstraint.activate(constraints)
@@ -174,4 +169,3 @@ extension MainListViewController: CustomTextFieldDelegate {
         presenter.updateParent(with: value, for: type)
     }
 }
-

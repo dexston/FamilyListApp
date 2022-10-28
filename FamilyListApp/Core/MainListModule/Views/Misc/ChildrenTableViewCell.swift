@@ -16,7 +16,6 @@ class ChildrenTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupView()
     }
     
     var child: Child = Child() {
@@ -33,7 +32,9 @@ class ChildrenTableViewCell: UITableViewCell {
     private let deleteButton: UIButton = {
         let button = UIButton()
         button.prepareForAutoLayout()
-        button.setImage(UIImage(systemName: K.String.Buttons.trashCanIcon), for: .normal)
+        button.configuration = .plain()
+        button.setImage(UIImage(systemName: K.Value.Button.trashcanIcon), for: .normal)
+        button.configuration?.baseForegroundColor = .systemRed
         return button
     }()
     
@@ -41,9 +42,12 @@ class ChildrenTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.prepareForAutoLayout()
         stack.axis = .vertical
-        stack.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
-        stack.spacing = 10
+        stack.spacing = K.Value.halfBasicSpacing
         stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: K.Value.Margin.halfBasic,
+                                           left: K.Value.Margin.basic,
+                                           bottom: K.Value.Margin.halfBasic,
+                                           right: .zero)
         return stack
     }()
     
@@ -58,7 +62,6 @@ class ChildrenTableViewCell: UITableViewCell {
         ageField.delegate = self
     }
     
-    
     private func setupConstraints() {
         let constraints = [
             fieldStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -67,8 +70,8 @@ class ChildrenTableViewCell: UITableViewCell {
             //
             deleteButton.leadingAnchor.constraint(equalTo: fieldStack.trailingAnchor),
             deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            deleteButton.widthAnchor.constraint(equalToConstant: 80)
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -K.Value.basicSpacing),
+            deleteButton.widthAnchor.constraint(equalToConstant: K.Value.Button.trashcanWidth)
         ]
         NSLayoutConstraint.activate(constraints)
     }

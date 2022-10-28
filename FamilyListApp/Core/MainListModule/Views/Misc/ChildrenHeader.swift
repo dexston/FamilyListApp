@@ -16,7 +16,6 @@ class ChildrenHeader: UIStackView {
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        setupView()
     }
     
     private let titleLabel: UILabel = {
@@ -25,13 +24,8 @@ class ChildrenHeader: UIStackView {
         return label
     }()
     
-    private let addButton: UIButton = {
-        let button = UIButton()
-        button.configuration = .bordered()
-        button.setTitle(K.String.Buttons.addChild, for: .normal)
-        button.isEnabled = false
-        return button
-    }()
+    private let addButton = CustomButton(title: K.String.Buttons.addChild,
+                                         color: .systemBlue)
     
     var addButtonAction: () -> () = { return } {
         didSet {
@@ -51,12 +45,13 @@ class ChildrenHeader: UIStackView {
         prepareForAutoLayout()
         addArrangedSubview(titleLabel)
         addArrangedSubview(addButton)
-        distribution = .fillEqually
+        distribution = .fillProportionally
         backgroundColor = .systemBackground
+        addButton.setImage(UIImage(systemName: K.Value.Button.plusIcon), for: .normal)
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(top: K.Value.Margin.basic,
                                      left: K.Value.Margin.basic,
-                                     bottom: K.Value.Margin.basic,
+                                     bottom: K.Value.Margin.halfBasic,
                                      right: K.Value.Margin.basic)
     }
 }
