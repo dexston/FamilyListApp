@@ -40,16 +40,13 @@ class MainListViewPresenter: MainListViewPresenterProtocol {
     }
     
     var isAddButtonEnabled: Bool {
-        if parent.isFilled,
-           childrens.count < K.Value.maxChildCount {
-            if let firstChild = childrens.first,
-               firstChild.isFilled {
-                return true
-            } else if childrens.isEmpty {
-                return true
+        guard parent.isFilled else { return false }
+        for child in childrens {
+            if !child.isFilled {
+                return false
             }
         }
-        return false
+        return true
     }
     
     required init(view: MainListViewProtocol) {
