@@ -24,6 +24,7 @@ class ChildrenTableViewCell: UITableViewCell {
             ageField.setValue(with: child.age)
         }
     }
+    
     var updateAction: (UITableViewCell, String, CustomTextField.TextFieldType) -> () = { _, _, _ in return }
     
     private let nameField = CustomTextField(type: .name)

@@ -31,7 +31,6 @@ class MainListViewPresenter: MainListViewPresenterProtocol {
     }
     var childrens: [Child] {
         didSet {
-            view?.updateTable()
             view?.updateButtons()
         }
     }
@@ -72,6 +71,7 @@ class MainListViewPresenter: MainListViewPresenterProtocol {
     
     func addChild() {
         childrens.insert(Child(), at: .zero)
+        view?.updateTable()
         view?.scrollToTop()
     }
     
@@ -88,10 +88,12 @@ class MainListViewPresenter: MainListViewPresenterProtocol {
     
     func deleteChild(at index: Int) {
         childrens.remove(at: index)
+        view?.updateTable()
     }
     
     func clearAll() {
         parent = Parent()
         childrens = []
+        view?.updateTable()
     }
 }

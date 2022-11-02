@@ -59,6 +59,7 @@ class CustomTextField: UIStackView {
                                      left: K.Value.Margin.textFieldHorizontal,
                                      bottom: K.Value.Margin.textFieldVertical,
                                      right: K.Value.Margin.textFieldHorizontal)
+        textField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
     }
     
     private func setupType() {
@@ -69,16 +70,20 @@ class CustomTextField: UIStackView {
         case .olderAge:
             labelTitle.text = K.String.Parent.ageTitle
             textField.placeholder = K.String.Parent.agePlaceholder
-            textField.keyboardType = .numbersAndPunctuation
+            textField.keyboardType = .numberPad
         case .yangerAge:
             labelTitle.text = K.String.Children.ageTitle
             textField.placeholder = K.String.Children.agePlaceholder
-            textField.keyboardType = .numbersAndPunctuation
+            textField.keyboardType = .numberPad
         }
     }
     
     func setValue(with string: String?) {
         textField.text = string
+    }
+    
+    @objc private func textFieldDidChanged() {
+        delegate?.update(value: textField.text ?? "", for: type)
     }
 }
 

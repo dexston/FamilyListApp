@@ -71,6 +71,7 @@ class MainListViewController: UIViewController {
         setupParentBlock()
         setupButtons()
         setupConstraints()
+        setupHideKeyboardGesture()
     }
     
     private func setupParentBlock() {
@@ -119,6 +120,16 @@ class MainListViewController: UIViewController {
             clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -K.Value.basicSpacing)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func setupHideKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
     }
 }
 
