@@ -36,7 +36,7 @@ class MainListViewPresenter: MainListViewPresenterProtocol {
     }
     
     var isClearButtonEnabled: Bool {
-        parent.name != "" || parent.age != ""
+        parent.name != "" || parent.age != "" || !childrens.isEmpty
     }
     
     var isAddButtonEnabled: Bool {
